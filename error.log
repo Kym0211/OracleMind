@@ -1,0 +1,24 @@
+
+warning jest > @jest/core > @jest/transform > babel-plugin-istanbul > test-exclude > glob@7.2.3: Glob versions prior to v9 are no longer supported
+warning jest > @jest/core > @jest/transform > babel-plugin-istanbul > test-exclude > glob > inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+error https://registry.yarnpkg.com/@esbuild/linux-ppc64/-/linux-ppc64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/linux-s390x/-/linux-s390x-0.24.2.tgz: ENOSPC: no space left on device, write
+error https://registry.yarnpkg.com/@esbuild/linux-arm64/-/linux-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/openbsd-x64/-/openbsd-x64-0.24.2.tgz: ENOSPC: no space left on device, write
+error https://registry.yarnpkg.com/@esbuild/freebsd-x64/-/freebsd-x64-0.24.2.tgz: ENOSPC: no space left on device, write
+error https://registry.yarnpkg.com/@esbuild/netbsd-arm64/-/netbsd-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/win32-ia32/-/win32-ia32-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/linux-ia32/-/linux-ia32-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/freebsd-arm64/-/freebsd-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/openbsd-arm64/-/openbsd-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/darwin-arm64/-/darwin-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error Error: ENOSPC: no space left on device, write
+error https://registry.yarnpkg.com/@esbuild/netbsd-x64/-/netbsd-x64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/linux-mips64el/-/linux-mips64el-0.24.2.tgz: ENOSPC: no space left on device, write
+error https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/linux-riscv64/-/linux-riscv64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error https://registry.yarnpkg.com/@esbuild/win32-arm64/-/win32-arm64-0.24.2.tgz: Extracting tar content of undefined failed, the file appears to be corrupt: "ENOSPC: no space left on device, write"
+error ENOSPC: no space left on device, mkdir '/home/kavyam/.cache/yarn/v6/npm-@pkgjs-parseargs-0.11.0-a77ea742fab25775145434eb1d2328cf5013ac33-integrity/node_modules'
