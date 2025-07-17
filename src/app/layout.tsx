@@ -35,9 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiased`}>
-        <AppProviders>
-          {children}
-        </AppProviders>
+        {children}
       </body>
     </html>
   )
