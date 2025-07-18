@@ -4,7 +4,6 @@ import bs58 from 'bs58';
 import {PublicKey} from '@solana/web3.js';
 import nacl from 'tweetnacl';
 
-// ed25519.etc.sha512Sync = sha512;
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
