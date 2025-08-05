@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { BackgroundLines } from "../components/ui/landing-page";
-import { signOut, signIn } from "next-auth/react";
+import { BackgroundLines } from "../../../components/ui/landing-page";
+import { signIn } from "next-auth/react";
 
 export default function BackgroundLinesDemo() {
   const [loading, setLoading] = useState(false)

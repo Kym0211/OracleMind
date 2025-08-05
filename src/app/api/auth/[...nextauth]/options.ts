@@ -1,53 +1,59 @@
 import { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import bs58 from 'bs58';
-import {PublicKey} from '@solana/web3.js';
-import nacl from 'tweetnacl';
+import GitHubProvider from 'next-auth/providers/github';
+import GoogleProvider from'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
     providers: [
-        CredentialsProvider({
-            id: "credentials",
-            name: "Credentials",
-            credentials: {
-                output: { label: "SignOut", type: "text" },
-                input: { label: "SignIn", type: "text" }
-            },
-            async authorize(credentials) {
-                try {
-                    console.log("Auth started: ", credentials);
-                    const input = credentials?.input ? JSON.parse(credentials.input) : {};
-                    const output = credentials?.output ? JSON.parse(credentials.output) : {};
-                    const { address, signature, message } = input;
-
-                    const publicKey = new PublicKey(address).toBytes();
-                    const messageBytes = new TextEncoder().encode(message);
-                    const signatureBytes = bs58.decode(signature);
-                    const isVerified = nacl
-                        .sign
-                        .detached
-                        .verify(
-                            messageBytes,
-                            signatureBytes,
-                            publicKey
-                        )
-
-                    
-                    if (!isVerified) return null;
-
-                    
-                    return { id: address, name: address };
-                } catch (e) {
-                    console.error(e);
-                    return null;
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID!,
+            clientSecret: process.env.GITHUB_SECRET!,
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID!,
+            clientSecret: process.env.GOOGLE_SECRET!,
+            authorization: {
+                params: {
+                prompt: "consent",
+                access_type: "offline",
+                response_type: "code"
                 }
             }
-
         })
     ],
 
+    // callbacks: {
+    //     async jwt({ token, user }: { token: any, user: any }) {
+    //         if(user) {
+    //             token._id = user._id?.toString()
+    //             token.isVerified = user.isVerified
+    //             token.isAcceptingMessages = user.isAcceptingMessages
+    //             token.username = user.username
+    //         }
+    //         return token
+    //     },
+    //     async session({ session, token }: { session: any, token: any }) {
+    //         if(token) {
+    //             session.user._id = token._id
+    //             session.user.isVerified = token.isVerified
+    //             session.user.isAcceptingMessages = token.isAcceptingMessages
+    //             session.user.username = token.username
+    //         }
+    //         return session
+    //     }
+    // },
+
+    callbacks: {
+        async jwt({ token, account }) {
+        if (account && account.provider === "google") {
+            token.refreshToken = account.refresh_token;
+            console.log("Google refresh token:", account.refresh_token);
+        }
+        return token;
+        }
+    },
+
     pages: {
-        signIn: "/"
+        signIn: "/",
     },
 
     secret: process.env.NEXTAUTH_SECRET
