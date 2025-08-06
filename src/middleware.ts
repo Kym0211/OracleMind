@@ -12,14 +12,14 @@ export async function middleware(request: NextRequest) {
             url.pathname.startsWith('/sign-up') ||
             url.pathname.startsWith('/') 
         ) {
-            return NextResponse.redirect(new URL('/v1', request.url));
+            return NextResponse.redirect(new URL('/dashboard', request.url));
         }
         return NextResponse.next();
     }
 
-    if (!token && url.pathname.startsWith('/v1')) {
+    if (!token && !url.pathname.endsWith("/")) {
     // if (!token) {
-        return NextResponse.redirect(new URL('/sign-in', request.url));
+        return NextResponse.redirect(new URL('/', request.url));
     }
 
     return NextResponse.next();
@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/sign-in',
+        '/',
         // '/sign-up',
         '/',
         // '/dashboard/:path*',

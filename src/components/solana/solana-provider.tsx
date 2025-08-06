@@ -1,18 +1,31 @@
-import dynamic from 'next/dynamic'
-import { ReactNode } from 'react'
-import { createSolanaDevnet, createSolanaLocalnet, createWalletUiConfig, WalletUi } from '@wallet-ui/react'
+"use client";
 
-export const WalletButton = dynamic(async () => (await import('@wallet-ui/react')).WalletUiDropdown, {
-  ssr: false,
-});
-export const ClusterButton = dynamic(async () => (await import('@wallet-ui/react')).WalletUiClusterDropdown, {
-  ssr: false,
-});
+import React, { FC, ReactNode, useMemo } from "react";
+import {
+  ConnectionProvider,
+  WalletProvider
+} from "@solana/wallet-adapter-react";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { clusterApiUrl } from "@solana/web3.js";
+import "@solana/wallet-adapter-react-ui/styles.css";
 
-const config = createWalletUiConfig({
-  clusters: [createSolanaDevnet(), createSolanaLocalnet()],
-})
-
-export function SolanaProvider({ children }: { children: ReactNode }) {
-  return <WalletUi config={config}>{children}</WalletUi>
+interface SolanaProviderProps {
+  children: ReactNode;
 }
+
+export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
+  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'
+  const network = WalletAdapterNetwork.Devnet;
+
+  // You can also provide a custom RPC endpoint
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={[]} autoConnect>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
+};

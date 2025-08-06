@@ -127,7 +127,28 @@
 }
 
 .wallet-adapter-button-trigger {
-  height: auto !important;
-  @apply !border !bg-background !shadow-xs hover:!bg-accent !text-accent-foreground hover:!text-accent-foreground dark:!bg-input/30 !border-input/10 dark:!border-input dark:hover:!bg-input/50;
-  @apply !px-2 !py-[6px] !rounded-md !text-sm !font-semibold !shadow-sm !transition-all;
+  background: transparent !important; /* matches dashboard bg, slightly opaquer */
+  color: #eee !important;
+  border: none !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+  transition: background 0.2s;
+}
+
+.walletButtonOverride button {
+  background-color: transparent !important;
+  border: 1.5px solid #6b21a8 !important; /* purple-700 */
+  color: #c4b5fd !important; /* purple-300 */
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(107, 33, 168, 0.5) !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.wallet-adapter-button-trigger:hover { /* soft highlight */
+  color: #fff !important;
 }
