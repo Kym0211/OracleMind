@@ -1,14 +1,14 @@
-export type OraclemindProgram = {
-  "address": "2qa3SpCoeuSb2FNHoJGx3q9ufeGvri68ahvx5vFi7QFZ"
+{
+  "address": "2qa3SpCoeuSb2FNHoJGx3q9ufeGvri68ahvx5vFi7QFZ",
   "metadata": {
-    "name": "oraclemindProgram",
+    "name": "oraclemind_program",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Anchor"
   },
   "instructions": [
     {
-      "name": "claimWinnings",
+      "name": "claim_winnings",
       "discriminator": [
         161,
         215,
@@ -26,7 +26,7 @@ export type OraclemindProgram = {
           "signer": true
         },
         {
-          "name": "marketAccount",
+          "name": "market_account",
           "writable": true
         },
         {
@@ -47,7 +47,7 @@ export type OraclemindProgram = {
               },
               {
                 "kind": "account",
-                "path": "marketAccount"
+                "path": "market_account"
               },
               {
                 "kind": "account",
@@ -57,7 +57,7 @@ export type OraclemindProgram = {
           }
         },
         {
-          "name": "bettorAta",
+          "name": "bettor_ata",
           "writable": true
         },
         {
@@ -65,14 +65,14 @@ export type OraclemindProgram = {
           "writable": true
         },
         {
-          "name": "tokenProgram",
+          "name": "token_program",
           "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
         }
       ],
       "args": []
     },
     {
-      "name": "createMarket",
+      "name": "create_market",
       "discriminator": [
         103,
         226,
@@ -90,7 +90,7 @@ export type OraclemindProgram = {
           "signer": true
         },
         {
-          "name": "marketAccount",
+          "name": "market_account",
           "writable": true,
           "pda": {
             "seeds": [
@@ -127,11 +127,11 @@ export type OraclemindProgram = {
             "seeds": [
               {
                 "kind": "account",
-                "path": "marketAccount"
+                "path": "market_account"
               },
               {
                 "kind": "account",
-                "path": "tokenProgram"
+                "path": "token_program"
               },
               {
                 "kind": "account",
@@ -181,15 +181,15 @@ export type OraclemindProgram = {
           "name": "mint"
         },
         {
-          "name": "associatedTokenProgram",
+          "name": "associated_token_program",
           "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
         },
         {
-          "name": "tokenProgram",
+          "name": "token_program",
           "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
         },
         {
-          "name": "systemProgram",
+          "name": "system_program",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -199,13 +199,13 @@ export type OraclemindProgram = {
           "type": "string"
         },
         {
-          "name": "endTime",
+          "name": "end_time",
           "type": "i64"
         }
       ]
     },
     {
-      "name": "placeBet",
+      "name": "place_bet",
       "discriminator": [
         222,
         62,
@@ -223,7 +223,7 @@ export type OraclemindProgram = {
           "signer": true
         },
         {
-          "name": "marketAccount",
+          "name": "market_account",
           "writable": true,
           "pda": {
             "seeds": [
@@ -249,7 +249,7 @@ export type OraclemindProgram = {
               {
                 "kind": "account",
                 "path": "market_account.title",
-                "account": "market"
+                "account": "Market"
               }
             ]
           }
@@ -272,7 +272,7 @@ export type OraclemindProgram = {
               },
               {
                 "kind": "account",
-                "path": "marketAccount"
+                "path": "market_account"
               },
               {
                 "kind": "account",
@@ -282,7 +282,7 @@ export type OraclemindProgram = {
           }
         },
         {
-          "name": "bettorAta",
+          "name": "bettor_ata",
           "writable": true,
           "pda": {
             "seeds": [
@@ -292,7 +292,7 @@ export type OraclemindProgram = {
               },
               {
                 "kind": "account",
-                "path": "tokenProgram"
+                "path": "token_program"
               },
               {
                 "kind": "account",
@@ -345,11 +345,11 @@ export type OraclemindProgram = {
             "seeds": [
               {
                 "kind": "account",
-                "path": "marketAccount"
+                "path": "market_account"
               },
               {
                 "kind": "account",
-                "path": "tokenProgram"
+                "path": "token_program"
               },
               {
                 "kind": "account",
@@ -399,21 +399,21 @@ export type OraclemindProgram = {
           "name": "mint"
         },
         {
-          "name": "associatedTokenProgram",
+          "name": "associated_token_program",
           "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
         },
         {
-          "name": "systemProgram",
+          "name": "system_program",
           "address": "11111111111111111111111111111111"
         },
         {
-          "name": "tokenProgram",
+          "name": "token_program",
           "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
         }
       ],
       "args": [
         {
-          "name": "betSide",
+          "name": "bet_side",
           "type": "bool"
         },
         {
@@ -423,7 +423,7 @@ export type OraclemindProgram = {
       ]
     },
     {
-      "name": "resolveMarket",
+      "name": "resolve_market",
       "discriminator": [
         155,
         23,
@@ -441,7 +441,7 @@ export type OraclemindProgram = {
           "signer": true
         },
         {
-          "name": "marketAccount",
+          "name": "market_account",
           "writable": true
         }
       ],
@@ -455,7 +455,7 @@ export type OraclemindProgram = {
   ],
   "accounts": [
     {
-      "name": "bettor",
+      "name": "Bettor",
       "discriminator": [
         126,
         54,
@@ -468,7 +468,7 @@ export type OraclemindProgram = {
       ]
     },
     {
-      "name": "market",
+      "name": "Market",
       "discriminator": [
         219,
         190,
@@ -484,63 +484,63 @@ export type OraclemindProgram = {
   "errors": [
     {
       "code": 6000,
-      "name": "invalidMarketMaker",
-      "msg": "unauthorized"
+      "name": "InvalidMarketMaker",
+      "msg": "Unauthorized"
     },
     {
       "code": 6001,
-      "name": "marketAlreadyResolved",
+      "name": "MarketAlreadyResolved",
       "msg": "Market has already been resolved"
     },
     {
       "code": 6002,
-      "name": "marketEndTimeExceeded",
+      "name": "MarketEndTimeExceeded",
       "msg": "Market end time has been exceeded"
     },
     {
       "code": 6003,
-      "name": "marketNotEndedYet",
+      "name": "MarketNotEndedYet",
       "msg": "Market has not ended yet"
     },
     {
       "code": 6004,
-      "name": "marketNotResolved",
+      "name": "MarketNotResolved",
       "msg": "Market has not been resolved yet"
     },
     {
       "code": 6005,
-      "name": "alreadyClaimed",
+      "name": "AlreadyClaimed",
       "msg": "Winnings have already been claimed"
     },
     {
       "code": 6006,
-      "name": "notAWinner",
+      "name": "NotAWinner",
       "msg": "User did not bet on the winning side"
     },
     {
       "code": 6007,
-      "name": "invalidVault",
+      "name": "InvalidVault",
       "msg": "Invalid vault token account"
     },
     {
       "code": 6008,
-      "name": "invalidBetSide",
+      "name": "InvalidBetSide",
       "msg": "Betting on an invalid side"
     },
     {
       "code": 6009,
-      "name": "insufficientBetAmount",
+      "name": "InsufficientBetAmount",
       "msg": "Insufficient amount to bet"
     },
     {
       "code": 6010,
-      "name": "unauthorized",
+      "name": "Unauthorized",
       "msg": "Unauthorized action"
     }
   ],
   "types": [
     {
-      "name": "bettor",
+      "name": "Bettor",
       "type": {
         "kind": "struct",
         "fields": [
@@ -557,15 +557,15 @@ export type OraclemindProgram = {
             "type": "u64"
           },
           {
-            "name": "betSide",
+            "name": "bet_side",
             "type": "bool"
           },
           {
-            "name": "isClaimed",
+            "name": "is_claimed",
             "type": "bool"
           },
           {
-            "name": "createdAt",
+            "name": "created_at",
             "type": "i64"
           },
           {
@@ -576,7 +576,7 @@ export type OraclemindProgram = {
       }
     },
     {
-      "name": "market",
+      "name": "Market",
       "type": {
         "kind": "struct",
         "fields": [
@@ -589,23 +589,23 @@ export type OraclemindProgram = {
             "type": "string"
           },
           {
-            "name": "yesAmount",
+            "name": "yes_amount",
             "type": "u64"
           },
           {
-            "name": "noAmount",
+            "name": "no_amount",
             "type": "u64"
           },
           {
-            "name": "yesCount",
+            "name": "yes_count",
             "type": "u64"
           },
           {
-            "name": "noCount",
+            "name": "no_count",
             "type": "u64"
           },
           {
-            "name": "isResolved",
+            "name": "is_resolved",
             "type": "bool"
           },
           {
@@ -619,7 +619,7 @@ export type OraclemindProgram = {
             "type": "pubkey"
           },
           {
-            "name": "endTime",
+            "name": "end_time",
             "type": "i64"
           },
           {
@@ -631,7 +631,7 @@ export type OraclemindProgram = {
             "type": "u8"
           },
           {
-            "name": "aiInsight",
+            "name": "ai_insight",
             "type": {
               "option": "pubkey"
             }
@@ -642,9 +642,9 @@ export type OraclemindProgram = {
   ],
   "constants": [
     {
-      "name": "marketMaker",
+      "name": "MARKET_MAKER",
       "type": "string",
       "value": "\"\""
     }
   ]
-};
+}

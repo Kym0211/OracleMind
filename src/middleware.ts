@@ -1,36 +1,45 @@
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
-export { default } from "next-auth/middleware";
+import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+const PUBLIC_PATHS = ['/'];
+
 export async function middleware(request: NextRequest) {
-    const token = await getToken({ req: request});
-    const url = request.nextUrl;
-    if (token) {
-        if (
-            url.pathname.startsWith('/sign-in') || 
-            url.pathname.startsWith('/sign-up') ||
-            url.pathname.startsWith('/') 
-        ) {
-            return NextResponse.redirect(new URL('/dashboard', request.url));
-        }
-        return NextResponse.next();
-    }
+  const token = await getToken({ req: request });
+  const { pathname } = request.nextUrl;
 
-    if (!token && !url.pathname.endsWith("/")) {
-    // if (!token) {
-        return NextResponse.redirect(new URL('/', request.url));
+  const isPublicPath = PUBLIC_PATHS.some(path => pathname.startsWith(path));
+  const isAuthPath = pathname.startsWith('/dashboard');
+    console.log("isPublicPath", isPublicPath);
+    console.log("isAuthPath", isAuthPath);
+    console.log("token", token);
+  if (token) {
+    // Authenticated user tries to access public pages => redirect to dashboard
+    console.log("enter")
+    if (isPublicPath) {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
     }
-
+    // Authenticated user accesses protected pages => allow
+    if (isAuthPath) {
+      return NextResponse.next();
+    }
+    // Allow other paths
     return NextResponse.next();
+  } else {
+    // No token => accessing public page => allow
+    if (isAuthPath) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+    // No token accessing protected routes => redirect to '/'
+    return NextResponse.redirect(new URL('/', request.url));
+  }
 }
 
 export const config = {
-    matcher: [
-        '/',
-        // '/sign-up',
-        '/',
-        // '/dashboard/:path*',
-        // '/verify/:path*',
-    ],
+  matcher: [
+    '/',
+    '/dashboard/:path*',
+    '/sign-in',
+    '/sign-up',
+  ],
 };
