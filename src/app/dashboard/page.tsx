@@ -1,44 +1,44 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FlipWords } from "@/components/ui/flibwords";
 import { signOut } from "next-auth/react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
-import { AnchorProvider, BN, Idl, Program, setProvider } from "@coral-xyz/anchor";
+import { AnchorProvider, Idl, Program, setProvider } from "@coral-xyz/anchor";
 import idl from "@/types/oraclemind_program.json"
 import { clusterApiUrl, Connection } from "@solana/web3.js";
+import MarketCard from "@/components/ui/market-card";
 
 export default function Dashboard() {
   const words = ["OracleMind", "Predict and Win"];
   const { publicKey, connected, signTransaction, signAllTransactions } = useWallet();
-
   const WalletMultiButtonDynamic = dynamic(
-    async () => (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton, {ssr: false}
-  )
+    async () => (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
+    { ssr: false }
+  );
+  
   const connection = new Connection(clusterApiUrl("devnet"));
-
   const wallet = useWallet();
   const provider = wallet ? new AnchorProvider(connection, wallet, {}) : undefined;
   if (provider) {
     setProvider(provider);
   }
-
   const program = provider ? new Program(idl as Idl, provider) : undefined;
-  // console.log(program);
 
-  let program_account: any = program?.account;
-  let bettors;
+  const [markets, setMarkets] = useState<any[]>([]);  // state for fetched markets
+
   const handleFetch = async () => {
-    console.log("clicked")
+    console.log("clicked");
     if (program) {
       try {
-        bettors = await program_account.market.all();
-        console.log(bettors);
+        const fetchedMarkets = await program?.account?.market.all();
+        console.log(fetchedMarkets);
+        setMarkets(fetchedMarkets);  // update React state here
       } catch (e) {
-        console.error("Failed to fetch bettors:", e);
-    };
-  }
-}
+        console.error("Failed to fetch markets:", e);
+      }
+    }
+  };
 
   return (
     <main className="min-h-screen w-full bg-gradient-to-br from-[#1f1525] via-[#170b1f] to-[#200b19]">
@@ -61,11 +61,23 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      {/* Dashboard content goes here */}
+      {/* Dashboard content */}
       <section className="p-6 pt-24">
-        {/* Your dashboard content */}
-        <h1 className="text-white text-3xl font-semibold mb-4">Welcome to OracleMind Dashboard: {publicKey?.toBase58()}</h1>
-        <button onClick={handleFetch} className="text-white">click</button>
+        <h1 className="text-white text-3xl font-semibold mb-4">
+          Welcome to OracleMind Dashboard: {publicKey?.toBase58()}
+        </h1>
+
+        <button onClick={handleFetch} className="text-white mb-6">Fetch Markets</button>
+
+        {/* Render a MarketCard for each market */}
+        {markets.length > 0 ? (
+          markets.map((market, index) => (
+            // console.log(market, index)
+          <MarketCard key={index} market={market} />
+        ))
+        ) : (
+          <p className="text-gray-400">No markets loaded. Click "Fetch Markets" to load.</p>
+        )}
       </section>
     </main>
   );

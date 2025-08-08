@@ -10,13 +10,12 @@ export async function middleware(request: NextRequest) {
 
   const isPublicPath = PUBLIC_PATHS.some(path => pathname.startsWith(path));
   const isAuthPath = pathname.startsWith('/dashboard');
-    console.log("isPublicPath", isPublicPath);
-    console.log("isAuthPath", isAuthPath);
-    console.log("token", token);
+    // console.log("isPublicPath", isPublicPath);
+    // console.log("isAuthPath", isAuthPath);
+    // console.log("token", token);
   if (token) {
     // Authenticated user tries to access public pages => redirect to dashboard
-    console.log("enter")
-    if (isPublicPath) {
+    if (isPublicPath && !isAuthPath) {
       return NextResponse.redirect(new URL('/dashboard', request.url));
     }
     // Authenticated user accesses protected pages => allow
@@ -27,8 +26,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   } else {
     // No token => accessing public page => allow
-    if (isAuthPath) {
-      return NextResponse.redirect(new URL('/', request.url));
+    if (isPublicPath && !isAuthPath) {
+      return NextResponse.next();
     }
     // No token accessing protected routes => redirect to '/'
     return NextResponse.redirect(new URL('/', request.url));
