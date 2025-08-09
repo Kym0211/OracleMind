@@ -18,6 +18,7 @@ import {
   TOKEN_PROGRAM_ID,
   getAssociatedTokenAddress
 } from "@solana/spl-token";
+import Link from "next/link";
 
 export default function Dashboard() {
   const words = ["OracleMind", "Predict and Win"];
@@ -80,12 +81,12 @@ export default function Dashboard() {
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          <button
-            onClick={() => ()}
+          <Link
+            href="./chat-space"
             className="text-white bg-transparent px-4 py-2 rounded-md font-semibold transition"
           >
             Chat Space
-          </button>
+          </Link>
           <button
             onClick={() => signOut()}
             className="text-white bg-transparent px-4 py-2 rounded-md font-semibold transition"

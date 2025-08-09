@@ -10,6 +10,7 @@ import {
 } from "@solana/spl-token";
 import { AnchorError, BN, Program } from "@coral-xyz/anchor";
 import { Toaster } from "./sonner";
+import { toast } from "sonner";
 
 // Utility functions
 function hexStringToNumber(hexStr: string): number {
@@ -48,8 +49,11 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
   const endTimeStr = formatUnixTimestamp(endTime);
   const placeBet = async (onSide: boolean, amount: number) => {
     if(!isWalletConnected) throw new Error("Wallet not connected")
-    // if (!publicKey) throw new Error("Wallet not connected");
-    // if (!publicKey) Toaster();
+    if (!publicKey) throw new Error("Wallet not connected");
+    // if (!publicKey) {
+      // toast("wallet not connected");
+      // Toaster();
+    // }
     if (!program) throw new Error("Program not initialized");
 
     // --- FETCH market account data to get mint ---
@@ -79,6 +83,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
           bettorAta: bettorAta,
           vault: vault,
           mint: mint,
+
         })
         .rpc();
       console.log("✅ Bet transaction signature:", txSig);
@@ -93,6 +98,40 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
     }
 
   };
+
+  const handleClaim = async() => {
+    if(!isWalletConnected) throw new Error("Wallet not connected")
+    if (!publicKey) throw new Error("Wallet not connected");
+    if (!program) throw new Error("Program not initialized");
+    const bettorAta = await getAssociatedTokenAddress(
+      mint,            // mint address
+      publicKey,       // owner
+    );
+
+    // --- Derive vault PDA ---
+    const vault = await getAssociatedTokenAddress(
+      mint,
+      marketAccount,
+      true
+    );
+
+    const [bettorAccount] = PublicKey.findProgramAddressSync(
+      [Buffer.from("bettor"), marketAccount.toBuffer(), publicKey.toBuffer()],
+      program.programId
+    );
+
+    const tx = await program?.methods
+                                .claimWinnings()
+                                .accounts({
+                                  signer: publicKey,
+                                  marketAccount: marketAccount,
+                                  bettor: bettorAccount,
+                                  bettorAta,
+                                  vault: vault
+                                })
+                                .rpc()
+    console.log("Claimed tx", tx);
+  }
 
   return (
     <div
@@ -188,14 +227,32 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
           <>
             <button
               className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-lg font-semibold transition cursor-pointer"
-              onClick={() => placeBet(true, 10)}
+              onClick={async () => {
+                if (!isWalletConnected) return toast("Wallet not connected");
+                const input = window.prompt("Enter the amount you want to bet on YES:", "1");
+                const amount = Number(input);
+                if (!input || isNaN(amount) || amount <= 0) {
+                  toast("Please enter a valid positive number.");
+                  return;
+                }
+                await placeBet(true, amount);
+              }}
             >
               Bet Yes
             </button>
 
             <button
               className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg font-semibold transition cursor-pointer"
-              onClick={() => placeBet(false, 10)}
+              onClick={async () => {
+                if (!isWalletConnected) return toast("Wallet not connected");
+                const input = window.prompt("Enter the amount you want to bet on NO:", "1");
+                const amount = Number(input);
+                if (!input || isNaN(amount) || amount <= 0) {
+                  toast("Please enter a valid positive number.");
+                  return;
+                }
+                await placeBet(false, amount);
+              }}
             >
               Bet No
             </button>
@@ -203,7 +260,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
         ) : (
           <button
             className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-lg font-semibold transition"
-            onClick={() => console.log("claimed")}
+            onClick={handleClaim}
           >
             Claim Winnings
           </button>
