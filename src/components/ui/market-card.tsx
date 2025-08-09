@@ -1,16 +1,7 @@
 import React from "react";
-import {
-  PublicKey,
-  SystemProgram
-} from "@solana/web3.js";
-import {
-  ASSOCIATED_TOKEN_PROGRAM_ID,
-  TOKEN_PROGRAM_ID,
-  getAssociatedTokenAddress
-} from "@solana/spl-token";
+import { PublicKey } from "@solana/web3.js";
+import { getAssociatedTokenAddress } from "@solana/spl-token";
 import { AnchorError, BN, Program } from "@coral-xyz/anchor";
-import { Toaster } from "./sonner";
-import { toast } from "sonner";
 
 // Utility functions
 function hexStringToNumber(hexStr: string): number {
@@ -228,11 +219,11 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
             <button
               className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-lg font-semibold transition cursor-pointer"
               onClick={async () => {
-                if (!isWalletConnected) return toast("Wallet not connected");
+                // if (!isWalletConnected) return toast("Wallet not connected");
                 const input = window.prompt("Enter the amount you want to bet on YES:", "1");
                 const amount = Number(input);
                 if (!input || isNaN(amount) || amount <= 0) {
-                  toast("Please enter a valid positive number.");
+                  // toast("Please enter a valid positive number.");
                   return;
                 }
                 await placeBet(true, amount);
@@ -244,11 +235,11 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, publicKey, program, isW
             <button
               className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg font-semibold transition cursor-pointer"
               onClick={async () => {
-                if (!isWalletConnected) return toast("Wallet not connected");
+                // if (!isWalletConnected) return toast("Wallet not connected");
                 const input = window.prompt("Enter the amount you want to bet on NO:", "1");
                 const amount = Number(input);
                 if (!input || isNaN(amount) || amount <= 0) {
-                  toast("Please enter a valid positive number.");
+                  // toast("Please enter a valid positive number.");
                   return;
                 }
                 await placeBet(false, amount);
