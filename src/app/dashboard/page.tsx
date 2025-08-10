@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function Dashboard() {
   const words = ["OracleMind", "Predict and Win"];
-  const { publicKey, connected, signTransaction, signAllTransactions } = useWallet();
+  const { publicKey, connected } = useWallet();
   const WalletMultiButtonDynamic = dynamic(
     async () => (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
     { ssr: false }

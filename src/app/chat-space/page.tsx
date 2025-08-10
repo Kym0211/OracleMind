@@ -47,7 +47,7 @@ export default function ChatSpace() {
   }, []);
 
   const fetchMessages = async () => {
-    let { data, error } = await supabase
+    const { data, error } = await supabase
       .from("messages")
       .select("*")
       .order("inserted_at", { ascending: true });
