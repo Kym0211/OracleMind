@@ -25,7 +25,7 @@ export default function Dashboard() {
   const provider = useMemo(
     () =>
       walletAdapter
-        ? new AnchorProvider(connection, walletAdapter, {})
+        ? new AnchorProvider(connection, walletAdapter as any, {})
         : undefined,
     [connection, walletAdapter]
   );
@@ -47,7 +47,7 @@ export default function Dashboard() {
       console.log("clicked");
       if (program) {
         try {
-          const fetchedMarkets = await program?.account?.market.all();
+          const fetchedMarkets = await (program as any)?.account?.market?.all();
           console.log(fetchedMarkets);
           settestMarkets([fetchedMarkets[0], fetchedMarkets[0]])
           setMarkets(fetchedMarkets);  // update React state here
