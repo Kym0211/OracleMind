@@ -1,5 +1,5 @@
 # OracleMind - Decentralized Prdiction Market with Group Chat
-**[Live Demo]**(https://oracle-mind.vercel.app)
+**[Live Demo](https://oracle-mind.vercel.app)**
 
 OracleMind is a **full-stack decentralized prediction market** dApp built on the Solana blockchain using the Anchor framework for on-chain smart contract logic.
 It enables users to connect their Solana wallets, participate in trustless betting markets, and interact socially in real time through a **global group chat** powered by **Supabase Realtime.**
