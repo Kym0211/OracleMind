@@ -8,16 +8,6 @@ import { AnchorProvider, Idl, Program, setProvider } from "@coral-xyz/anchor";
 import idl from "@/types/oraclemind_program.json"
 import { clusterApiUrl, Connection } from "@solana/web3.js";
 import MarketCard from "@/components/ui/market-card";
-import { Address } from "gill";
-import {
-  PublicKey,
-  SystemProgram
-} from "@solana/web3.js";
-import {
-  ASSOCIATED_TOKEN_PROGRAM_ID,
-  TOKEN_PROGRAM_ID,
-  getAssociatedTokenAddress
-} from "@solana/spl-token";
 import Link from "next/link";
 
 export default function Dashboard() {
