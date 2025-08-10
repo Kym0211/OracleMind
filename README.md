@@ -1,84 +1,78 @@
-# template-next-tailwind-counter
+# OracleMind - Decentralized Prdiction Market with Group Chat
+**[Live Demo]**(https://oracle-mind.vercel.app)
 
-This is a Next.js app containing:
+OracleMind is a **full-stack decentralized prediction market** dApp built on the Solana blockchain using the Anchor framework for on-chain smart contract logic.
+It enables users to connect their Solana wallets, participate in trustless betting markets, and interact socially in real time through a **global group chat** powered by **Supabase Realtime.**
 
-- Tailwind CSS setup for styling
-- Useful wallet UI elements setup using [Gill](https://gill.site/)
-- A basic Counter Solana program written in Anchor
-- UI components for interacting with the Counter program
+This project combines **Web3 on-chain logic** with **Web2 real-time communication**, showcasing an example of a hybrid dApp architecture.
 
-## Getting Started
+## Overview
 
-### Installation
+OracleMind allows users to:
+- View **on-chain markets** created via an Anchor Solana program.
 
-#### Download the template
+- **Bet YES or NO** on market outcomes by staking **SPL tokens** in a decentralized, transparent manner.
 
-```shell
-pnpm create solana-dapp@latest -t gh:solana-developers/solana-templates/templates/template-next-tailwind-counter
+- **Claim winnings** automatically distributed based on market resolution.
+
+- **Chat in real time** with other participants using wallet-based identities.
+
+## Features
+
+### Blockchain Features
+- Wallet Connection
+- Market Display
+- Betting
+- Claim Winnings
+- Automatic Token Account Handling
+
+### Social Features
+- Supabase Realtime Chat
+- Wallet Address Identity
+
+## Tech Stack
+### Frontend
+- Next.js
+- React
+- Tailwind 
+- Solana libraries
+
+### Smart Contract
+- Anchor
+- Spl Tokens
+
+### Backend
+- Supabase
+
+## Setup & Installation
+1. Clone the repository
+```
+git clone https://github.com/your-username/oraclemind.git
+cd oraclemind
+```
+2. Install dependencies
+```
+yarn install
+```
+3. Create local .env 
+```
+NEXTAUTH_SECRET="
+GOOGLE_ID=
+GOOGLE_SECRET=
+NEXTAUTH_URL=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+4. Run the App
+```
+yarn dev
 ```
 
-#### Install Dependencies
+## Future Improvements
+- UI improvement
+- User profile 
+- Market stats
+- Multi-token-support
 
-```shell
-pnpm install
-```
-
-## Apps
-
-### anchor
-
-This is a Solana program written in Rust using the Anchor framework.
-
-#### Commands
-
-You can use any normal anchor commands. Either move to the `anchor` directory and run the `anchor` command or prefix the command with `pnpm`, eg: `pnpm anchor`.
-
-#### Sync the program id:
-
-Running this command will create a new keypair in the `anchor/target/deploy` directory and save the address to the Anchor config file and update the `declare_id!` macro in the `./src/lib.rs` file of the program. This will also update the constant in the `anchor/src/counter-exports.ts` file.
-
-```shell
-pnpm run setup
-```
-
-#### Build the program:
-
-```shell
-pnpm anchor-build
-```
-
-#### Start the test validator with the program deployed:
-
-```shell
-pnpm anchor-localnet
-```
-
-#### Run the tests
-
-```shell
-pnpm anchor-test
-```
-
-#### Deploy to Devnet
-
-```shell
-pnpm anchor deploy --provider.cluster devnet
-```
-
-### web
-
-This is a React app that uses the Anchor generated client to interact with the Solana program.
-
-#### Commands
-
-Start the web app
-
-```shell
-pnpm dev
-```
-
-Build the web app
-
-```shell
-pnpm build
-```
+## License
+MIT License © 2025 Kavyam
